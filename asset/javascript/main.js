@@ -75,7 +75,7 @@ function openSearch() {
       return;
     } else {
       buidWeather(
-        `http://api.weatherapi.com/v1/current.json?key=${APIKey}&q=${searchInput.value}`
+        `https://api.weatherapi.com/v1/current.json?key=${APIKey}&q=${searchInput.value}`
       );
     }
   } else {
