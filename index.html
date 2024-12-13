@@ -89,7 +89,7 @@
             >Astro
           </li>
           <li>
-            <i class="fa-solid fa-hurricane" style="color: gray"></i>Current
+            <i class="fa-solid fa-hurricane" style="color: orange"></i>Current
           </li>
           <li>
             <i class="fa-solid fa-triangle-exclamation" style="color: red"></i
@@ -116,15 +116,13 @@
               class="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-              onclick="closemodal()"
             ></button>
           </div>
           <div class="modal-body">
-            <p style="color: red">Cant find your city ! Try again !.</p>
+            <p style="color: red"></p>
           </div>
           <div class="modal-footer">
             <button
-              onclick="closemodal()"
               type="button"
               id="close-modal"
               class="btn btn-secondary"
@@ -134,6 +132,51 @@
             </button>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="inner__subMenu--infor">
+      <div class="close__subMenu--infor">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+      <div class="slide-block">
+        <div class="mySlides bug__content" id="MS1"></div>
+        <div class="mySlides bug__content" id="MS2"></div>
+        <div class="mySlides bug__content" id="MS3"></div>
+        <div class="mySlides bug__content" id="MS4">
+          <h1>
+            <i class="fa-solid fa-triangle-exclamation" style="color: red"></i>
+            ALERT
+          </h1>
+
+          <ul>
+            <li><strong>last_updated:</strong> 2024-12-13 14:15</li>
+            <li>
+              <strong><sup>o</sup>C:</strong> 5.4
+            </li>
+            <li>
+              <strong><sup>o</sup>F:</strong> 41.7
+            </li>
+            <li><strong>wind (Kph):</strong> 4.7 KPH</li>
+            <li><strong>wind (mph):</strong> 2.9 MPH</li>
+            <li><strong>wind direction:</strong> ESE</li>
+            <li><strong>humidity: </strong> 93 %</li>
+            <li><strong>visible (km): </strong> 5.0 Km</li>
+            <li><strong>visible (m): </strong> 3.0 m</li>
+            <li><strong>sun UV: </strong> 0.2</li>
+            <li>
+              <strong
+                >air quality:
+                <ul style="font-size: 12px; margin-left: 20px">
+                  <li>CO: 471.75</li>
+                  <li>NO2: 90.28</li>
+                  <li>O3: 16.0</li>
+                </ul>
+              </strong>
+            </li>
+          </ul>
+        </div>
+        <div class="mySlides">5</div>
+        <div class="mySlides">6</div>
       </div>
     </div>
     <script
@@ -146,6 +189,6 @@
       integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
       crossorigin="anonymous"
     ></script>
-    <script src="asset/javascript/main.js"></script>
+    <script type="module" src="asset/javascript/main.js"></script>
   </body>
 </html>

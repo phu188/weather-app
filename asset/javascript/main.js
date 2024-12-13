@@ -1,3 +1,4 @@
+import { buidLocation, buidAstro, buidCurrent } from "./subMenu.js";
 async function fetchAPI(url) {
   try {
     const response = await fetch(url);
@@ -17,6 +18,13 @@ async function fetchAPI(url) {
     return null;
   }
 }
+
+var closemodal = () => {
+  console.log("close modal");
+  Modal.style.display = "none";
+  searchInput.value = "";
+};
+var weatherObject = null;
 let checkDay = 1;
 let numsForcastDay = 2;
 let day = `transparent`;
@@ -36,6 +44,7 @@ const divContent = document.querySelector(".inner__content");
 const divTemp = document.querySelector(".inner__temperature");
 const divIcon = document.querySelector(".inner__icon");
 const closeModal = document.querySelector("#close-modal");
+const closeModal2 = document.querySelector(".btn-close");
 const Modal = document.querySelector(".modal");
 const bigBackground = document.querySelector(".wrap");
 const divAbout = document.querySelectorAll(".inner__about div");
@@ -46,6 +55,12 @@ const subMenu = document.querySelector(".sub__menu");
 const mainMenu = document.querySelector(".main__menu");
 const closeMenuBtn = document.querySelector(".close__menu--btn");
 
+closeModal.addEventListener("click", () => {
+  closemodal();
+});
+closeModal2.addEventListener("click", () => {
+  closemodal();
+});
 closeMenuBtn.addEventListener("click", () => {
   mainMenu.classList.remove("show-menu");
   setTimeout(() => {
@@ -53,8 +68,6 @@ closeMenuBtn.addEventListener("click", () => {
   }, 300);
 });
 subMenu.addEventListener("click", (event) => {
-  console.log("oce");
-  console.log(event.target);
   if (event.target === subMenu) {
     mainMenu.classList.remove("show-menu");
     setTimeout(() => {
@@ -62,10 +75,7 @@ subMenu.addEventListener("click", (event) => {
     }, 300);
   }
 });
-function closemodal() {
-  Modal.style.display = "none";
-  searchInput.value = "";
-}
+
 menuBtn.addEventListener("click", () => {
   if (subMenu.classList.contains("hide")) {
     subMenu.classList.remove("hide");
@@ -159,16 +169,24 @@ function MakebtnShake() {
     searchBtn.classList.toggle("shake");
   }, 1000);
 }
-
+function showModal(text) {
+  Modal.style.display = "block";
+  Modal.querySelector(".modal-body > p").textContent = text;
+}
 MakebtnShake();
 async function buidWeather(url) {
   const weather = await fetchAPI(url);
   if (weather === null) {
-    Modal.style.display = "block";
+    showModal("Cant find your city ! Try again !.");
     return;
   }
-  console.log(weather);
+  weatherObject = weather;
+  console.log(weatherObject);
+
   weatherLocation.textContent = `${weather.location.name}, ${weather.location.country}`;
+  document.querySelector(
+    ".locate__name"
+  ).textContent = `${weather.location.name}, ${weather.location.country}`;
   currTemp.textContent = `${weather.current.temp_c}`;
 
   // console.log(weather.current.condition.icon);
@@ -180,6 +198,8 @@ async function buidWeather(url) {
     dayMode();
   }
   divIcon.querySelector("img").src = weather.current.condition.icon;
+  document.querySelector(".sub__menu--decor img").src =
+    weather.current.condition.icon;
   currentTime.textContent = getDate(weather.location.localtime);
   weatherPredict.textContent = weather.current.condition.text;
   wind.textContent = `${weather.current.wind_kph} (km/h)`;
@@ -188,6 +208,9 @@ async function buidWeather(url) {
   searchInput.value = "";
   resetAbout();
   openSearch();
+  buidLocation(weatherObject);
+  buidAstro(weatherObject.forecast.forecastday);
+  buidCurrent(weatherObject);
 }
 function getDate(localtime) {
   const date = new Date();
@@ -292,3 +315,24 @@ function dayMode() {
     item.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
   });
 }
+
+const closeMenuInfor = document.querySelector(".close__subMenu--infor");
+
+closeMenuInfor.addEventListener("click", () => {
+  console.log(closeMenuInfor);
+  parentSlide.style.display = "none";
+});
+const tranSlide = document.querySelector(".slide-block");
+const parentSlide = document.querySelector(".inner__subMenu--infor");
+const allDivInfor = document.querySelectorAll(".main__menu > ul > li");
+console.log(allDivInfor);
+allDivInfor.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    if (weatherObject !== null) {
+      tranSlide.style.transform = `translateX(${-100 * index}%)`;
+      parentSlide.style.display = "block";
+    } else {
+      showModal("Please search for a city first!");
+    }
+  });
+});

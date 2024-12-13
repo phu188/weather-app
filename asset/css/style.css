@@ -242,7 +242,7 @@
   right: 0 !important;
 }
 .main__menu ul {
-  margin-top: 50px;
+  margin-top: 20px;
 }
 .main__menu ul li {
   padding: 10px 10px;
@@ -270,13 +270,81 @@
   cursor: pointer;
 }
 .sub__menu--decor {
+  margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  height: 150px;
+  width: 150px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.45) inset;
+  border-radius: 50%;
   margin-bottom: 25px;
-  width: 100%;
-  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .sub__menu--decor img {
   object-fit: cover;
+}
+.inner__subMenu--infor {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3500;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.slide-block {
+  transition-timing-function: ease;
+  transition-duration: 600ms;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+.mySlides {
+  position: relative;
+  min-width: 100vw;
+  height: 100%;
+  transition: transform 0.7s ease;
+  padding: 15px;
+}
+.close__subMenu--infor {
+  position: absolute;
+  font-size: 25px;
+  right: 5px;
+  top: 0;
+  z-index: 4000;
+}
+.bug__content {
+  padding: 30px 25px;
+  overflow: auto;
+}
+.bug__content h1 {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.bug__content ul li strong {
+  text-transform: uppercase;
+  font-size: 17px;
+}
+#MS1 ul li {
+  box-shadow: -5px 5px 0 0 aqua, -10px 10px 0 0 rgba(49, 207, 243, 0.6),
+    -15px 15px 0 0 rgba(107, 226, 245, 0.4),
+    -20px 20px 0 0 rgba(145, 242, 249, 0.2),
+    -25px 25px 0 0 rgba(178, 246, 242, 0.1);
+  padding: 5px 5px;
+  margin-bottom: 40px;
+}
+#MS2 ul li {
+  box-shadow: 0 0 0 2px greenyellow, 8px 8px 0 0 greenyellow;
+  padding: 5px 5px;
+  margin-bottom: 40px;
+}
+#MS3 > ul > li {
+  box-shadow: orange 0px 0px 15px 5px, rgba(255, 255, 0, 0.2) 1px 1px 1px;
+  padding: 5px 5px;
+  margin-bottom: 40px;
 }
