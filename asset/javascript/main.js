@@ -18,6 +18,7 @@ async function fetchAPI(url) {
   }
 }
 let checkDay = 1;
+let numsForcastDay = 2;
 let day = `transparent`;
 let night = `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8))`;
 const APIKey = "db56dab392f74dd09c7110432241012";
@@ -38,16 +39,74 @@ const closeModal = document.querySelector("#close-modal");
 const Modal = document.querySelector(".modal");
 const bigBackground = document.querySelector(".wrap");
 const divAbout = document.querySelectorAll(".inner__about div");
-console.log(divAbout);
+const divFog = document.querySelector(".inner__fog");
 const smallBackground = document.querySelector(".inner__wrap");
-console.log(Modal);
-
 const searchInput = document.querySelector("#searchInput");
-closeModal.addEventListener("click", () => {
+const subMenu = document.querySelector(".sub__menu");
+const mainMenu = document.querySelector(".main__menu");
+const closeMenuBtn = document.querySelector(".close__menu--btn");
+
+closeMenuBtn.addEventListener("click", () => {
+  mainMenu.classList.remove("show-menu");
+  setTimeout(() => {
+    subMenu.classList.add("hide");
+  }, 300);
+});
+subMenu.addEventListener("click", (event) => {
+  console.log("oce");
+  console.log(event.target);
+  if (event.target === subMenu) {
+    mainMenu.classList.remove("show-menu");
+    setTimeout(() => {
+      subMenu.classList.add("hide");
+    }, 300);
+  }
+});
+function closemodal() {
   Modal.style.display = "none";
   searchInput.value = "";
+}
+menuBtn.addEventListener("click", () => {
+  if (subMenu.classList.contains("hide")) {
+    subMenu.classList.remove("hide");
+    setTimeout(() => {
+      mainMenu.classList.add("show-menu");
+    }, 100);
+  } else {
+    mainMenu.classList.remove("show-menu");
+    setTimeout(() => {
+      subMenu.classList.add("hide");
+    }, 300);
+  }
 });
-
+function resetAbout() {
+  divAbout.forEach((element) => {
+    element.style.display = "block";
+    element.classList.remove("bloss");
+    divFog.classList.remove("open");
+  });
+}
+divAbout.forEach((element) => {
+  element.addEventListener("click", function () {
+    if (this.classList.contains("bloss")) {
+      divAbout.forEach((element) => {
+        if (element != this) {
+          element.style.display = "block";
+        }
+      });
+      this.classList.remove("bloss");
+      divFog.classList.remove("open");
+    } else {
+      divAbout.forEach((element) => {
+        if (element != this) {
+          element.style.display = "none";
+        }
+      });
+      this.classList.add("bloss");
+      divFog.classList.add("open");
+    }
+  });
+});
 divContent.addEventListener("click", () => {
   if (!divContent.classList.contains("rotate")) {
     divContent.classList.add("rotate");
@@ -75,7 +134,7 @@ function openSearch() {
       return;
     } else {
       buidWeather(
-        `https://api.weatherapi.com/v1/current.json?key=${APIKey}&q=${searchInput.value}`
+        `https://api.weatherapi.com/v1/forecast.json?key=${APIKey}&q=${searchInput.value}&days=${numsForcastDay}&aqi=yes&alerts=yes`
       );
     }
   } else {
@@ -100,7 +159,7 @@ function MakebtnShake() {
     searchBtn.classList.toggle("shake");
   }, 1000);
 }
-console.log(divIcon);
+
 MakebtnShake();
 async function buidWeather(url) {
   const weather = await fetchAPI(url);
@@ -127,6 +186,7 @@ async function buidWeather(url) {
   visible.textContent = `${weather.current.vis_miles} (m)`;
   humidity.textContent = `${weather.current.humidity} (%)`;
   searchInput.value = "";
+  resetAbout();
   openSearch();
 }
 function getDate(localtime) {
@@ -147,7 +207,9 @@ let weather = [
   `asset/img/snow.png`,
   `asset/img/mist.png`,
   `asset/img/fog.png`,
+  `asset/img/storm.png`,
   `asset/img/clear.png`,
+  `asset/img/cloud.png`,
   `asset/img/overcast.png`,
   `asset/img/hot.png`,
   `asset/img/warm.png`,
@@ -174,13 +236,14 @@ function changeBackground(temperature, text) {
     snow: weather[1],
     mist: weather[2],
     fog: weather[3],
-    clear: weather[4],
-    cloudy: weather[4],
-    overcast: weather[5],
-    sunny: weather[6],
-    hot: weather[6],
-    warm: weather[7],
-    cold: weather[8],
+    storm: weather[4],
+    clear: weather[5],
+    cloudy: weather[6],
+    overcast: weather[7],
+    sunny: weather[9],
+    hot: weather[8],
+    warm: weather[9],
+    cold: weather[10],
   };
 
   // Check weather conditions
