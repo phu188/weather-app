@@ -285,7 +285,7 @@
   object-fit: cover;
 }
 .inner__subMenu--infor {
-  display: none;
+  /* display: none; */
   position: fixed;
   top: 0;
   left: 0;
@@ -303,6 +303,7 @@
   width: 100vw;
   height: 100vh;
   position: relative;
+  transform: translateX(-400%);
 }
 .mySlides {
   position: relative;
@@ -321,6 +322,10 @@
 .bug__content {
   padding: 30px 25px;
   overflow: auto;
+  position: relative;
+}
+.bug__content i {
+  margin-right: 5px;
 }
 .bug__content h1 {
   text-align: center;
@@ -347,4 +352,97 @@
   box-shadow: orange 0px 0px 15px 5px, rgba(255, 255, 0, 0.2) 1px 1px 1px;
   padding: 5px 5px;
   margin-bottom: 40px;
+}
+#MS4 ul li {
+  box-shadow: 0 0 0 2px red, 8px 8px 0 0 red;
+  padding: 5px 5px;
+  margin-bottom: 40px;
+}
+#MS5 {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.4)
+  );
+  padding: 0;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+#MS5 .bug__content__head {
+  margin: 25px 15px 25px 15px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 7px 7px rgb(83, 226, 251);
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 10px;
+}
+#MS5 .bug__content__head .bug__content__desc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#MS5 .bug__content__head .content__left {
+  text-align: left;
+}
+#MS5 h1,
+#MS5 h2,
+#MS5 p {
+  margin: 0;
+}
+#MS5 strong {
+  font-size: 17px;
+}
+#MS5 .bug__content__head .content__right {
+  text-align: right;
+}
+#MS5 .bug__content__head .content__right p {
+  margin-top: 5px;
+}
+#MS5 .bug__content__body ul {
+  margin: 0 15px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 7px 7px rgb(83, 226, 251);
+  padding: 5px 30px;
+  text-align: center;
+}
+#MS5 .bug__content__body ul li {
+  font-weight: bold;
+  padding: 5px;
+  font-size: 20px;
+}
+
+#MS5 .bug__content__body > div {
+  margin-bottom: 25px;
+}
+#MS5 .wrap__box__weather {
+  display: flex;
+  overflow-x: auto;
+  margin-top: 15px;
+  gap: 10px;
+  padding: 10px 15px 10px 15px;
+}
+#MS5 .wrap__box__weather .box-weather {
+  box-shadow: 5px 5px rgb(83, 226, 251);
+  border-radius: 10px;
+  display: flex;
+  padding: 5px;
+  width: 70px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+#MS5 .wrap__box__weather .box-weather p {
+  font-size: 15px;
+  display: inline-block;
+  height: 20px;
+  margin-top: 5px;
+}
+.overview__box .box-weather p:nth-child(2) {
+  color: blueviolet;
+}
+.Wind__box .wrap__box__weather .box-weather > strong {
+  margin-top: 5px;
 }

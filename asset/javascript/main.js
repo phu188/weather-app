@@ -1,4 +1,10 @@
-import { buidLocation, buidAstro, buidCurrent } from "./subMenu.js";
+import {
+  buidLocation,
+  buidAstro,
+  buidCurrent,
+  buidAlert,
+  buidForecast,
+} from "./subMenu.js";
 async function fetchAPI(url) {
   try {
     const response = await fetch(url);
@@ -173,6 +179,7 @@ function showModal(text) {
   Modal.style.display = "block";
   Modal.querySelector(".modal-body > p").textContent = text;
 }
+
 MakebtnShake();
 async function buidWeather(url) {
   const weather = await fetchAPI(url);
@@ -189,7 +196,6 @@ async function buidWeather(url) {
   ).textContent = `${weather.location.name}, ${weather.location.country}`;
   currTemp.textContent = `${weather.current.temp_c}`;
 
-  // console.log(weather.current.condition.icon);
   checkDay = weather.current.is_day;
   changeBackground(weather.current.temp_c, weather.current.condition.text);
   if (!weather.current.is_day) {
@@ -211,6 +217,8 @@ async function buidWeather(url) {
   buidLocation(weatherObject);
   buidAstro(weatherObject.forecast.forecastday);
   buidCurrent(weatherObject);
+  buidAlert(weatherObject);
+  buidForecast(weatherObject);
 }
 function getDate(localtime) {
   const date = new Date();
@@ -244,11 +252,10 @@ function changeBackground(temperature, text) {
 
   // Function to set background
   const setBackground = (url) => {
-    console.log(url);
     const background = `${
       checkDay === 1 ? day : night + ","
     } url(${url}) no-repeat center/cover`;
-    console.log(background);
+
     bigBackground.style.background = background;
     smallBackground.style.background = background;
   };
@@ -319,20 +326,21 @@ function dayMode() {
 const closeMenuInfor = document.querySelector(".close__subMenu--infor");
 
 closeMenuInfor.addEventListener("click", () => {
-  console.log(closeMenuInfor);
   parentSlide.style.display = "none";
 });
 const tranSlide = document.querySelector(".slide-block");
 const parentSlide = document.querySelector(".inner__subMenu--infor");
 const allDivInfor = document.querySelectorAll(".main__menu > ul > li");
-console.log(allDivInfor);
 allDivInfor.forEach((item, index) => {
-  item.addEventListener("click", () => {
-    if (weatherObject !== null) {
-      tranSlide.style.transform = `translateX(${-100 * index}%)`;
-      parentSlide.style.display = "block";
-    } else {
-      showModal("Please search for a city first!");
-    }
-  });
+  if (index < allDivInfor.length - 1) {
+    item.addEventListener("click", () => {
+      if (weatherObject !== null) {
+        tranSlide.style.transform = `translateX(${-100 * index}%)`;
+        parentSlide.style.display = "block";
+      } else {
+        showModal("Please search for a city first!");
+      }
+    });
+  } else {
+  }
 });
