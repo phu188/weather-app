@@ -4,6 +4,7 @@ import {
   buidCurrent,
   buidAlert,
   buidForecast,
+  buidHistory,
 } from "./subMenu.js";
 async function fetchAPI(url) {
   try {
@@ -23,6 +24,36 @@ async function fetchAPI(url) {
     return null;
   }
 }
+buidHistory(localStorage);
+function useKey(key) {
+  buidWeather(
+    `https://api.weatherapi.com/v1/forecast.json?key=${APIKey}&q=${key}&days=${numsForcastDay}&aqi=yes&alerts=yes`,
+    key
+  );
+  buidHistory(localStorage);
+  searchInput.classList.add("showInput");
+  setTimeout(() => {
+    parentSlide.style.display = "none";
+    mainMenu.classList.remove("show-menu");
+    searchInput.value = "";
+    subMenu.classList.add("hide");
+  }, 500);
+}
+function deleteKey(key) {
+  localStorage.removeItem(key);
+  buidHistory(localStorage);
+}
+const keyList = document.querySelector("#MS6");
+
+keyList.addEventListener("click", (event) => {
+  if (event.target.tagName === "BUTTON") {
+    if (event.target.classList.contains("useBtn")) {
+      useKey(event.target.dataset.key);
+    } else if (event.target.classList.contains("deleteBtn")) {
+      deleteKey(event.target.dataset.key);
+    }
+  }
+});
 
 var closemodal = () => {
   Modal.style.display = "none";
@@ -148,7 +179,8 @@ function openSearch() {
       return;
     } else {
       buidWeather(
-        `https://api.weatherapi.com/v1/forecast.json?key=${APIKey}&q=${searchInput.value}&days=${numsForcastDay}&aqi=yes&alerts=yes`
+        `https://api.weatherapi.com/v1/forecast.json?key=${APIKey}&q=${searchInput.value}&days=${numsForcastDay}&aqi=yes&alerts=yes`,
+        searchInput.value
       );
     }
   } else {
@@ -179,14 +211,15 @@ function showModal(text) {
 }
 
 MakebtnShake();
-async function buidWeather(url) {
+async function buidWeather(url, value) {
   const weather = await fetchAPI(url);
   if (weather === null) {
     showModal("Cant find your city ! Try again !.");
     return;
   }
   weatherObject = weather;
-  // console.log(weatherObject);
+
+  localStorage.setItem(value, 1);
 
   weatherLocation.textContent = `${weather.location.name}, ${weather.location.country}`;
   document.querySelector(
@@ -217,6 +250,7 @@ async function buidWeather(url) {
   buidCurrent(weatherObject);
   buidAlert(weatherObject);
   buidForecast(weatherObject);
+  buidHistory(localStorage);
 }
 function getDate(localtime) {
   const date = new Date();
@@ -326,19 +360,33 @@ const closeMenuInfor = document.querySelector(".close__subMenu--infor");
 closeMenuInfor.addEventListener("click", () => {
   parentSlide.style.display = "none";
 });
+
+const openAddress = document.querySelector("#openAdress");
+openAddress.addEventListener("click", () => {
+  tranSlide.style.transform = `translateX(${-100 * 5}%)`;
+  parentSlide.style.display = "block";
+});
+const listAddress = document.querySelector(".list__address");
 const tranSlide = document.querySelector(".slide-block");
 const parentSlide = document.querySelector(".inner__subMenu--infor");
 const allDivInfor = document.querySelectorAll(".main__menu > ul > li");
 allDivInfor.forEach((item, index) => {
-  if (index < allDivInfor.length - 1) {
+  if (index > 0) {
     item.addEventListener("click", () => {
       if (weatherObject !== null) {
-        tranSlide.style.transform = `translateX(${-100 * index}%)`;
+        tranSlide.style.transform = `translateX(${-100 * (index - 1)}%)`;
         parentSlide.style.display = "block";
       } else {
         showModal("Please search for a city first!");
       }
     });
   } else {
+    item.addEventListener("click", () => {
+      if (listAddress.classList.contains("show-address")) {
+        listAddress.classList.remove("show-address");
+      } else {
+        listAddress.classList.add("show-address");
+      }
+    });
   }
 });

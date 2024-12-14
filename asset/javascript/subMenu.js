@@ -338,3 +338,35 @@ export function buidForecast(object) {
     `;
   divLocation.innerHTML = htmls;
 }
+export function buidHistory(O) {
+  const divLocation = document.querySelector("#MS6");
+  let htmls = `<h1>
+                <i
+                  style="color: rgb(245, 69, 248)"
+                  class="fa-solid fa-address-book"
+                ></i>
+                Your History
+              </h1>
+              <ul>`;
+  if (O.length === 0) {
+    htmls += `<h1><i style="color: yellow" class="fa-solid fa-circle-exclamation"></i>There is no history</h1>`;
+  } else {
+    for (let i = 0; i < O.length; ++i) {
+      htmls += `
+          <li>
+                <div class="key__wrap"><strong>key:</strong> ${localStorage.key(
+                  i
+                )}</div>
+                <button class="useBtn" data-key="${localStorage.key(
+                  i
+                )}">Use</button>
+                <button class="deleteBtn" data-key="${localStorage.key(
+                  i
+                )}">Delete</button>
+                </li>
+      `;
+    }
+  }
+  htmls += `</ul>`;
+  divLocation.innerHTML = htmls;
+}

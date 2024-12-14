@@ -237,6 +237,7 @@
   background-color: white;
   top: 0;
   right: -250px;
+  overflow: auto;
 }
 .show-menu {
   right: 0 !important;
@@ -244,7 +245,7 @@
 .main__menu ul {
   margin-top: 20px;
 }
-.main__menu ul li {
+.main__menu > ul > li {
   padding: 10px 10px;
   margin-bottom: 15px;
   border-radius: 10px;
@@ -253,6 +254,39 @@
   border: 1px solid #212529;
   display: flex;
   align-items: center;
+  position: relative;
+  justify-content: flex-start;
+}
+.main__menu > ul > li:last-child {
+  margin: 0;
+}
+.list__address {
+  position: relative;
+  width: 100%;
+  display: none;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.show-address {
+  display: block;
+  opacity: 1;
+  padding: 0 0 0 10px;
+}
+.list__address ul {
+  margin: 0;
+}
+.list__address ul li {
+  font-size: 15px;
+  padding: 10px 10px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 500;
+  border: 1px solid #212529;
+  display: flex;
+  align-items: center;
+  position: relative;
   justify-content: flex-start;
 }
 .main__menu ul li i {
@@ -444,4 +478,26 @@
 }
 .Wind__box .wrap__box__weather .box-weather > strong {
   margin-top: 5px;
+}
+#MS6 > ul > li {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+#MS6 > ul > li .key__wrap {
+  width: 80%;
+  margin-bottom: 15px;
+  padding: 5px 10px 5px 5px;
+  box-shadow: 0 0 0 2px rgb(245, 69, 248), 8px 8px 0 0 rgb(245, 69, 248);
+}
+#MS6 > ul > li button {
+  width: 70px;
+  border: 1px solid rgb(245, 69, 248);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+#MS6 > ul > li button:hover {
+  background-color: rgb(245, 69, 248);
+  border-color: black;
 }
