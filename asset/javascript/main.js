@@ -16,7 +16,6 @@ async function fetchAPI(url) {
     }
 
     const data = await response.json();
-    console.log(url);
     return data;
   } catch (error) {
     // Hiển thị thông báo lỗi khi xảy ra lỗi
@@ -26,7 +25,6 @@ async function fetchAPI(url) {
 }
 
 var closemodal = () => {
-  console.log("close modal");
   Modal.style.display = "none";
   searchInput.value = "";
 };
@@ -188,7 +186,7 @@ async function buidWeather(url) {
     return;
   }
   weatherObject = weather;
-  console.log(weatherObject);
+  // console.log(weatherObject);
 
   weatherLocation.textContent = `${weather.location.name}, ${weather.location.country}`;
   document.querySelector(

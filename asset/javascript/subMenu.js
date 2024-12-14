@@ -183,15 +183,12 @@ export function buidAlert(O) {
             }</li>
           </ul>
     `;
-    console.log(typeof element.effective);
-    console.log(element.expires);
   });
   divLocation.innerHTML = htmls;
 }
 export function buidForecast(object) {
   const divLocation = document.querySelector("#MS5");
   let currHour = object.location.localtime;
-  console.log(currHour);
   currHour = currHour.substring(currHour.length - 5);
   currHour = currHour.substring(0, 2);
   let hourObject = [];
@@ -207,7 +204,6 @@ export function buidForecast(object) {
     }
     hourObject.push(object.forecast.forecastday[1].hour[i]);
   }
-  console.log(hourObject);
 
   let htmls = "";
   htmls += `
@@ -340,6 +336,5 @@ export function buidForecast(object) {
             </div>
           </div>
     `;
-  console.log(htmls);
   divLocation.innerHTML = htmls;
 }

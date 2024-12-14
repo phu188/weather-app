@@ -285,7 +285,7 @@
   object-fit: cover;
 }
 .inner__subMenu--infor {
-  /* display: none; */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -303,7 +303,6 @@
   width: 100vw;
   height: 100vh;
   position: relative;
-  transform: translateX(-400%);
 }
 .mySlides {
   position: relative;
