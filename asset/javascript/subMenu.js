@@ -9,7 +9,7 @@ function getDate(localtime) {
   return res;
 }
 export function buidLocation(O) {
-  const divLocation = document.querySelector("#MS1");
+  const divLocation = document.querySelector("#MS4");
   let htmls = "";
   htmls += `
     <h1>
@@ -28,12 +28,11 @@ export function buidLocation(O) {
             )}</li>
           </ul>
   
-  
   `;
   divLocation.innerHTML = htmls;
 }
 export function buidAstro(O) {
-  const divLocation = document.querySelector("#MS2");
+  const divLocation = document.querySelector("#MS5");
   let htmls = "";
   htmls += `
     <h1>
@@ -77,12 +76,12 @@ export function buidAstro(O) {
   divLocation.innerHTML = htmls;
 }
 export function buidCurrent(O) {
-  const divLocation = document.querySelector("#MS3");
+  const divLocation = document.querySelector("#MS6");
   let htmls = "";
   htmls += `
      <h1>
-            <i class="fa-solid fa-hurricane" style="color: orange"></i>
-            CURRENT
+            <i class="fa-solid fa-hurricane" style="color: yellow"></i>
+            Now
           </h1>
 
           <ul>
@@ -96,12 +95,13 @@ export function buidCurrent(O) {
               <strong><sup>o</sup>F:</strong> ${O.current.temp_f}
             </li>
             <li><strong>condition:</strong> ${O.current.condition.text}</li>
-            <li><strong>wind (KPH):</strong> ${O.current.wind_kph} (KPH)</li>
-            <li><strong>wind (MPH):</strong> ${O.current.wind_mph} (MPH)</li>
+            <li><strong>wind (Km/h):</strong> ${O.current.wind_kph} (Km/h)</li>
+            <li><strong>wind (Mile/h):</strong> ${
+              O.current.wind_mph
+            } (Mile/h)</li>
             <li><strong>wind direction:</strong> ${O.current.wind_dir}</li>
             <li><strong>humidity: </strong> ${O.current.humidity} (%)</li>
             <li><strong>visible (Km): </strong> ${O.current.vis_km} (Km)</li>
-            <li><strong>visible (m): </strong> ${O.current.vis_miles} (m)</li>
             <li><strong>sun UV: </strong> ${O.current.uv}</li>
             <li>
               <strong
@@ -120,7 +120,7 @@ export function buidCurrent(O) {
   divLocation.innerHTML = htmls;
 }
 export function buidAlert(O) {
-  const divLocation = document.querySelector("#MS4");
+  const divLocation = document.querySelector("#MS7");
   let htmls = "";
   htmls += `<h1>
   <i class="fa-solid fa-triangle-exclamation" style="color: red"></i>
@@ -187,7 +187,7 @@ export function buidAlert(O) {
   divLocation.innerHTML = htmls;
 }
 export function buidForecast(object) {
-  const divLocation = document.querySelector("#MS5");
+  const divLocation = document.querySelector("#MS8");
   let currHour = object.location.localtime;
   currHour = currHour.substring(currHour.length - 5);
   currHour = currHour.substring(0, 2);
@@ -339,7 +339,7 @@ export function buidForecast(object) {
   divLocation.innerHTML = htmls;
 }
 export function buidHistory(O) {
-  const divLocation = document.querySelector("#MS6");
+  const divLocation = document.querySelector("#MS1");
   let htmls = `<h1>
                 <i
                   style="color: rgb(245, 69, 248)"

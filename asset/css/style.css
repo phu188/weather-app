@@ -363,13 +363,13 @@
 }
 .bug__content h1 {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 .bug__content ul li strong {
   text-transform: uppercase;
   font-size: 17px;
 }
-#MS1 ul li {
+#MS4 ul li {
   box-shadow: -5px 5px 0 0 aqua, -10px 10px 0 0 rgba(49, 207, 243, 0.6),
     -15px 15px 0 0 rgba(107, 226, 245, 0.4),
     -20px 20px 0 0 rgba(145, 242, 249, 0.2),
@@ -377,22 +377,22 @@
   padding: 5px 5px;
   margin-bottom: 40px;
 }
-#MS2 ul li {
+#MS5 ul li {
   box-shadow: 0 0 0 2px greenyellow, 8px 8px 0 0 greenyellow;
   padding: 5px 5px;
   margin-bottom: 40px;
 }
-#MS3 > ul > li {
-  box-shadow: orange 0px 0px 15px 5px, rgba(255, 255, 0, 0.2) 1px 1px 1px;
+#MS6 > ul > li {
+  box-shadow: yellow 0px 0px 15px 5px, rgba(255, 255, 0, 0.2) 1px 1px 1px;
   padding: 5px 5px;
   margin-bottom: 40px;
 }
-#MS4 ul li {
+#MS7 ul li {
   box-shadow: 0 0 0 2px red, 8px 8px 0 0 red;
   padding: 5px 5px;
   margin-bottom: 40px;
 }
-#MS5 {
+#MS8 {
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.4),
@@ -402,7 +402,7 @@
   overflow-y: auto;
   box-sizing: border-box;
 }
-#MS5 .bug__content__head {
+#MS8 .bug__content__head {
   margin: 25px 15px 25px 15px;
   display: flex;
   justify-content: space-between;
@@ -411,29 +411,29 @@
   border-radius: 10px;
   padding: 10px 10px;
 }
-#MS5 .bug__content__head .bug__content__desc {
+#MS8 .bug__content__head .bug__content__desc {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-#MS5 .bug__content__head .content__left {
+#MS8 .bug__content__head .content__left {
   text-align: left;
 }
-#MS5 h1,
-#MS5 h2,
-#MS5 p {
+#MS8 h1,
+#MS8 h2,
+#MS8 p {
   margin: 0;
 }
-#MS5 strong {
+#MS8 strong {
   font-size: 17px;
 }
-#MS5 .bug__content__head .content__right {
+#MS8 .bug__content__head .content__right {
   text-align: right;
 }
-#MS5 .bug__content__head .content__right p {
+#MS8 .bug__content__head .content__right p {
   margin-top: 5px;
 }
-#MS5 .bug__content__body ul {
+#MS8 .bug__content__body ul {
   margin: 0 15px;
   border-radius: 10px;
   background-color: white;
@@ -441,23 +441,23 @@
   padding: 5px 30px;
   text-align: center;
 }
-#MS5 .bug__content__body ul li {
+#MS8 .bug__content__body ul li {
   font-weight: bold;
   padding: 5px;
   font-size: 20px;
 }
 
-#MS5 .bug__content__body > div {
+#MS8 .bug__content__body > div {
   margin-bottom: 25px;
 }
-#MS5 .wrap__box__weather {
+#MS8 .wrap__box__weather {
   display: flex;
   overflow-x: auto;
   margin-top: 15px;
   gap: 10px;
   padding: 10px 15px 10px 15px;
 }
-#MS5 .wrap__box__weather .box-weather {
+#MS8 .wrap__box__weather .box-weather {
   box-shadow: 5px 5px rgb(83, 226, 251);
   border-radius: 10px;
   display: flex;
@@ -468,7 +468,7 @@
   justify-content: center;
   background-color: white;
 }
-#MS5 .wrap__box__weather .box-weather p {
+#MS8 .wrap__box__weather .box-weather p {
   font-size: 15px;
   display: inline-block;
   height: 20px;
@@ -480,25 +480,35 @@
 .Wind__box .wrap__box__weather .box-weather > strong {
   margin-top: 5px;
 }
-#MS6 > ul > li {
+#MS1 > ul > li {
   display: flex;
   gap: 20px;
   align-items: center;
   justify-content: space-between;
 }
-#MS6 > ul > li .key__wrap {
+#MS1 > ul > li .key__wrap {
   width: 80%;
   margin-bottom: 15px;
   padding: 5px 10px 5px 5px;
   box-shadow: 0 0 0 2px rgb(245, 69, 248), 8px 8px 0 0 rgb(245, 69, 248);
 }
-#MS6 > ul > li button {
+#MS1 > ul > li button {
   width: 70px;
   border: 1px solid rgb(245, 69, 248);
   padding: 5px 10px;
   border-radius: 5px;
 }
-#MS6 > ul > li button:hover {
+#MS1 > ul > li button:hover {
   background-color: rgb(245, 69, 248);
   border-color: black;
+}
+#MS3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+#MS3 #save-location {
+  padding: 5px 10px;
+  margin-top: 20px;
+  border: 1px solid blue;
 }

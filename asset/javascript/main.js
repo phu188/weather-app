@@ -43,7 +43,7 @@ function deleteKey(key) {
   localStorage.removeItem(key);
   buidHistory(localStorage);
 }
-const keyList = document.querySelector("#MS6");
+const keyList = document.querySelector("#MS1");
 
 keyList.addEventListener("click", (event) => {
   if (event.target.tagName === "BUTTON") {
@@ -54,6 +54,98 @@ keyList.addEventListener("click", (event) => {
     }
   }
 });
+const map = L.map("map").setView([21.0285, 105.8542], 13); // Hà Nội mặc định
+const UseLocateBtn = document.querySelector("#save-location");
+// Thêm tile layer từ OpenStreetMap
+L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png", {
+  attribution: "© OpenStreetMap contributors",
+}).addTo(map);
+
+// Bước 3: Thêm marker và cập nhật tọa độ
+let marker;
+let currlat = null,
+  currlon = null;
+function onMapClick(e) {
+  UseLocateBtn.classList.remove("hide");
+  const { lat, lng } = e.latlng; // Lấy tọa độ kinh độ và vĩ độ
+
+  if (marker) {
+    marker.setLatLng(e.latlng); // Cập nhật vị trí marker nếu đã tồn tại
+  } else {
+    marker = L.marker(e.latlng).addTo(map); // Tạo marker mới
+  }
+  currlat = lat;
+  currlon = lng;
+  // Hiển thị tọa độ
+}
+
+map.on("click", onMapClick); // Lắng nghe sự kiện click trên bản đồ
+UseLocateBtn.addEventListener("click", function () {
+  console.log(currlat);
+  console.log(currlon);
+  if (currlat !== null && currlon !== null) {
+    buidWeather(
+      `https://api.weatherapi.com/v1/forecast.json?key=${APIKey}&q=${
+        String(currlat) + " " + String(currlon)
+      }&days=${numsForcastDay}&aqi=yes&alerts=yes`,
+      null
+    );
+    searchInput.classList.add("showInput");
+    setTimeout(() => {
+      parentSlide.style.display = "none";
+      mainMenu.classList.remove("show-menu");
+      searchInput.value = "";
+      subMenu.classList.add("hide");
+    }, 500);
+  } else {
+    showModal("The Loacation is not valid");
+  }
+});
+const locateMeBtn = document.querySelector("#locate-me");
+
+// Hàm lấy vị trí hiện tại
+function locateUser() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log(position);
+        const { latitude, longitude } = position.coords;
+
+        // Cập nhật tâm bản đồ và thêm marker tại vị trí hiện tại
+        map.setView([latitude, longitude], 13);
+
+        if (marker) {
+          marker.setLatLng([latitude, longitude]);
+        } else {
+          marker = L.marker([latitude, longitude]).addTo(map);
+        }
+
+        // Hiển thị tọa độ
+        currlat = latitude;
+        currlon = longitude;
+        console.log("Latitude:", latitude);
+        console.log("Longitude:", longitude);
+
+        // Hiển thị nút lưu vị trí
+        alertLocated.textContent = "Your current location";
+        tranSlide.style.transform = `translateX(${-200}%)`;
+        parentSlide.style.display = "block";
+        setTimeout(() => {
+          UseLocateBtn.classList.remove("hide");
+        }, 2000);
+      },
+      (error) => {
+        // Xử lý lỗi khi không thể lấy vị trí
+        console.error("Lỗi khi lấy vị trí:", error.message);
+        alert(
+          "Không thể lấy vị trí hiện tại. Vui lòng kiểm tra cài đặt trình duyệt!"
+        );
+      }
+    );
+  } else {
+    alert("Trình duyệt của bạn không hỗ trợ Geolocation API!");
+  }
+}
 
 var closemodal = () => {
   Modal.style.display = "none";
@@ -89,6 +181,7 @@ const searchInput = document.querySelector("#searchInput");
 const subMenu = document.querySelector(".sub__menu");
 const mainMenu = document.querySelector(".main__menu");
 const closeMenuBtn = document.querySelector(".close__menu--btn");
+const alertLocated = document.querySelector("#alertLocated");
 
 closeModal.addEventListener("click", () => {
   closemodal();
@@ -218,8 +311,9 @@ async function buidWeather(url, value) {
     return;
   }
   weatherObject = weather;
-
-  localStorage.setItem(value, 1);
+  if (value !== null) {
+    localStorage.setItem(value, 1);
+  }
 
   weatherLocation.textContent = `${weather.location.name}, ${weather.location.country}`;
   document.querySelector(
@@ -277,6 +371,7 @@ let weather = [
   `asset/img/hot.png`,
   `asset/img/warm.png`,
   `asset/img/cold.png`,
+  `asset/img/blizzard.png`,
 ];
 
 function changeBackground(temperature, text) {
@@ -299,6 +394,7 @@ function changeBackground(temperature, text) {
     mist: weather[2],
     fog: weather[3],
     storm: weather[4],
+    blizzard: weather[11],
     clear: weather[5],
     cloudy: weather[6],
     overcast: weather[7],
@@ -318,11 +414,11 @@ function changeBackground(temperature, text) {
 
   // Temperature-based backgrounds
   if (temperature >= 35) {
-    setBackground(weather[6]);
-  } else if (temperature >= 20) {
-    setBackground(weather[7]);
-  } else {
     setBackground(weather[8]);
+  } else if (temperature >= 20) {
+    setBackground(weather[9]);
+  } else {
+    setBackground(weather[10]);
   }
 }
 
@@ -360,10 +456,21 @@ const closeMenuInfor = document.querySelector(".close__subMenu--infor");
 closeMenuInfor.addEventListener("click", () => {
   parentSlide.style.display = "none";
 });
+function resetMap() {
+  UseLocateBtn.classList.add("hide");
+  map.setView([21.0285, 105.8542], 13); // Hà Nội mặc định
+  if (marker) {
+    map.removeLayer(marker);
+    marker = null;
+  }
 
+  // Reset tọa độ
+  currlat = null;
+  currlon = null;
+}
 const openAddress = document.querySelector("#openAdress");
 openAddress.addEventListener("click", () => {
-  tranSlide.style.transform = `translateX(${-100 * 5}%)`;
+  tranSlide.style.transform = `translateX(${0}%)`;
   parentSlide.style.display = "block";
 });
 const listAddress = document.querySelector(".list__address");
@@ -373,9 +480,17 @@ const allDivInfor = document.querySelectorAll(".main__menu > ul > li");
 allDivInfor.forEach((item, index) => {
   if (index > 0) {
     item.addEventListener("click", () => {
-      if (weatherObject !== null) {
-        tranSlide.style.transform = `translateX(${-100 * (index - 1)}%)`;
-        parentSlide.style.display = "block";
+      if (index === 1 || index === 2 || weatherObject !== null) {
+        if (index === 1) {
+          locateUser();
+        } else {
+          if (index === 2) {
+            resetMap();
+            alertLocated.textContent = "Choose location in map";
+          }
+          tranSlide.style.transform = `translateX(${-100 * index}%)`;
+          parentSlide.style.display = "block";
+        }
       } else {
         showModal("Please search for a city first!");
       }

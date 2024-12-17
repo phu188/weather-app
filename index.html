@@ -21,6 +21,9 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
     <link rel="stylesheet" href="asset/css/base.css" />
     <link rel="stylesheet" href="asset/css/style.css" />
     <title>Document</title>
@@ -100,6 +103,14 @@
           </div>
 
           <li>
+            <i class="fa-solid fa-street-view" style="color: orange"></i>current
+            location
+          </li>
+          <li>
+            <i class="fa-solid fa-map-location-dot" style="color: blue"></i>Use
+            Map
+          </li>
+          <li>
             <i class="fa-solid fa-location-dot" style="color: aqua"></i>Location
           </li>
           <li>
@@ -107,7 +118,7 @@
             >Astro
           </li>
           <li>
-            <i class="fa-solid fa-hurricane" style="color: orange"></i>Current
+            <i class="fa-solid fa-hurricane" style="color: yellow"></i>Now
           </li>
           <li>
             <i class="fa-solid fa-triangle-exclamation" style="color: red"></i
@@ -154,10 +165,22 @@
       <div class="slide-block">
         <div class="mySlides bug__content" id="MS1"></div>
         <div class="mySlides bug__content" id="MS2"></div>
-        <div class="mySlides bug__content" id="MS3"></div>
+        <div class="mySlides bug__content" id="MS3">
+          <h1>
+            <i class="fa-solid fa-map-location-dot" style="color: blue"></i>Use
+            Map
+          </h1>
+          <div class="inner-map">
+            <h1 id="alertLocated">Choose location in map</h1>
+            <div id="map" style="height: 60vh; width: 100%"></div>
+          </div>
+          <button id="save-location" class="hide">Use this Location</button>
+        </div>
         <div class="mySlides bug__content" id="MS4"></div>
-        <div class="mySlides" id="MS5"></div>
+        <div class="mySlides bug__content" id="MS5"></div>
         <div class="mySlides bug__content" id="MS6"></div>
+        <div class="mySlides bug__content" id="MS7"></div>
+        <div class="mySlides" id="MS8"></div>
       </div>
     </div>
   </body>
